@@ -112,11 +112,15 @@ df['scores'].fillna(df['scores'].mean(), inplace=True)
 # print(df)
 
 # binning by means
-print(pd.cut(df['scores'], bins=3, labels=["Low", "Medium", "High"]))
+# print(pd.cut(df['scores'], bins=3, labels=["Low", "Medium", "High"]))      # Finding bins
+print(df.groupby(pd.cut(df['scores'], bins=3)).transform('mean'))    # Smoothing Data
 
 # binning by boundries
 print(pd.cut(df['scores'], bins=[
       min(df['scores']), max(df['scores'])], labels=["bin"]))
+
+# I didn't find proper way to smooth data by bin boundaries. Can refer this link for some help
+# https://stackoverflow.com/questions/64142236/smoothing-by-bin-boundaries-using-pandas-numpy
 
 # 6
 # Implement Python code to apply Apriori algorithm to mine association
